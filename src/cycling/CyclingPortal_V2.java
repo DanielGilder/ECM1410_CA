@@ -1,0 +1,286 @@
+package cycling;
+
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
+
+/**
+ * BadCyclingPortal is a minimally compiling, but non-functioning implementor
+ * of the CyclingPortalInterface interface.
+ * 
+ * @author Diogo Pacheco
+ * @version 1.0
+ *
+ */
+
+public class CyclingPortal_V2 implements CyclingPortalInterface {
+
+	HashMap<Integer, Race> races = new HashMap<Integer, Race>();
+	HashMap<Integer, Team> teams = new HashMap<Integer, Team>();
+	HashMap<Integer, List<Integer>>  raceID_segmentID = new HashMap<Integer, List<Integer> >();
+
+
+	@Override
+	public int[] getRaceIds() {
+	int[] IntegerList = new int[this.races.size()];
+		int k = 0;
+		for (Integer i : this.races.keySet()) {
+				IntegerList[k] = i;
+				k++;
+		}
+		return racesArray;
+	}
+
+	@Override
+	public int createRace(String name, String description) throws IllegalNameException, InvalidNameException {
+		Race race = new Race(name, description);
+		races.put(race.getRaceID(), race);
+		return race.getRaceID();
+	}
+
+	@Override
+	public String viewRaceDetails(int raceId) throws IDNotRecognisedException {
+		
+		return null;
+	}
+
+	@Override
+	public void removeRaceById(int raceId) throws IDNotRecognisedException {
+		races.remove(raceId);
+		raceID_segmentID.remove(raceId);
+
+	}
+
+	@Override
+	public int getNumberOfStages(int raceId) throws IDNotRecognisedException {
+		
+		return races.get(raceId).getNoOfStages();
+	}
+
+	@Override
+	public int addStageToRace(int raceId, String stageName, String description, double length, LocalDateTime startTime,
+			StageType type)
+			throws IDNotRecognisedException, IllegalNameException, InvalidNameException, InvalidLengthException {
+		
+		int stageID = races.get(raceId).addStage(raceId,stageName, description,length, startTime, type);
+		raceID_segmentID.put(raceId, ); //?????????
+		return stageID;
+	}
+
+	@Override
+	public int[] getRaceStages(int raceId) throws IDNotRecognisedException {
+		// TODO Auto-generated method stub
+		
+		return races.getStages(receId);;
+	}
+
+	@Override
+	public double getStageLength(int stageId) throws IDNotRecognisedException {
+		
+		return races.get(stageID).stageLength(stageID);;
+	}
+
+	@Override
+	public void removeStageById(int stageId) throws IDNotRecognisedException {
+		
+
+	}
+
+	@Override
+	public int addCategorizedClimbToStage(int stageId, Double location, SegmentType type, Double averageGradient,
+			Double length) throws IDNotRecognisedException, InvalidLocationException, InvalidStageStateException,
+			InvalidStageTypeException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int addIntermediateSprintToStage(int stageId, double location) throws IDNotRecognisedException,
+			InvalidLocationException, InvalidStageStateException, InvalidStageTypeException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void removeSegment(int segmentId) throws IDNotRecognisedException, InvalidStageStateException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void concludeStagePreparation(int stageId) throws IDNotRecognisedException, InvalidStageStateException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public int[] getStageSegments(int stageId) throws IDNotRecognisedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+
+
+
+
+
+
+	@Override
+	public int createTeam(String name, String description) throws IllegalNameException, InvalidNameException {
+		Team team = new Team(name, description)
+		teams.put(team.getTeamID(), team);
+		return team.getTeamID();
+	}
+
+	@Override
+	public void removeTeam(int teamId) throws IDNotRecognisedException {
+		teams.remove(teamId);
+
+	}
+
+	@Override
+	public int[] getTeams() {
+	int[] IntegerList = new int[this.races.size()];
+		int k = 0;
+		for (Integer i : this.teams.keySet()) {
+				IntegerList[k] = i;
+				k++;
+		}
+		
+		return IntegerList;
+	}
+
+	@Override
+	public int[] getTeamRiders(int teamId) throws IDNotRecognisedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int createRider(int teamID, String name, int yearOfBirth)
+			throws IDNotRecognisedException, IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void removeRider(int riderId) throws IDNotRecognisedException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void registerRiderResultsInStage(int stageId, int riderId, LocalTime... checkpoints)
+			throws IDNotRecognisedException, DuplicatedResultException, InvalidCheckpointsException,
+			InvalidStageStateException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public LocalTime[] getRiderResultsInStage(int stageId, int riderId) throws IDNotRecognisedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LocalTime getRiderAdjustedElapsedTimeInStage(int stageId, int riderId) throws IDNotRecognisedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteRiderResultsInStage(int stageId, int riderId) throws IDNotRecognisedException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public int[] getRidersRankInStage(int stageId) throws IDNotRecognisedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LocalTime[] getRankedAdjustedElapsedTimesInStage(int stageId) throws IDNotRecognisedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int[] getRidersPointsInStage(int stageId) throws IDNotRecognisedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int[] getRidersMountainPointsInStage(int stageId) throws IDNotRecognisedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void eraseCyclingPortal() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void saveCyclingPortal(String filename) throws IOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void loadCyclingPortal(String filename) throws IOException, ClassNotFoundException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void removeRaceByName(String name) throws NameNotRecognisedException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public LocalTime[] getGeneralClassificationTimesInRace(int raceId) throws IDNotRecognisedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int[] getRidersPointsInRace(int raceId) throws IDNotRecognisedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int[] getRidersMountainPointsInRace(int raceId) throws IDNotRecognisedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int[] getRidersGeneralClassificationRank(int raceId) throws IDNotRecognisedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int[] getRidersPointClassificationRank(int raceId) throws IDNotRecognisedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int[] getRidersMountainPointClassificationRank(int raceId) throws IDNotRecognisedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
